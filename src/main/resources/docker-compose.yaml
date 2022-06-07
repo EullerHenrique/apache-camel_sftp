@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+
+  sftp:
+    image: atmoz/sftp
+    container_name: sftp
+    volumes:
+      - ./upload:/home/euller/upload
+    ports:
+      - "22:22"
+    command: euller:12345:1001
