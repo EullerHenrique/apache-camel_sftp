@@ -4,7 +4,6 @@ import com.euller.sftp.service.sftp.SftpService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 
 @RestController
 @RequestMapping("/")
