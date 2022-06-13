@@ -1,7 +1,8 @@
 package com.euller.sftp.test;
 
+import com.euller.sftp.controller.CsvController;
 import com.euller.sftp.controller.SftpController;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -12,13 +13,15 @@ import java.util.List;
 import java.util.concurrent.*;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class Test {
 
     private final SftpController sftpController;
 
-    @Bean
-    public  void testeVolume(){
+    private final CsvController csvController;
+
+    //@Bean
+    public void testeVolume(){
 
         LocalDateTime inicio = LocalDateTime.now();
         System.out.println("Início: "+inicio);
@@ -76,6 +79,13 @@ public class Test {
            System.out.println("Tempo decorrido: " + hours + ":" + minutes + ":" + secondes + ":" + millis);
 
        }
+
+    }
+
+    @Bean
+    public void testeManipulacao(){
+
+        csvController.manipulateCSV(1, 5);
 
     }
 

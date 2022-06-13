@@ -34,6 +34,11 @@ public class DownloadFile implements Callable<Boolean> {
         try {
             URI fromFtpUrl = new URIBuilder()
                     .setScheme("sftp")
+                    //.setHost("127.0.0.1")
+                    //.setPort(22)
+                    //.setPath("/upload/"+this.file)
+                    //.addParameter("username", "euller")
+                    //.addParameter("password", "12345")
                     .setHost("10.120.11.106")
                     .setPort(2222)
                     .setPath("/upload/upload2/"+this.file)
@@ -98,7 +103,7 @@ public class DownloadFile implements Callable<Boolean> {
                                 .log("Downloaded file ${file:name} complete.")
                                 //to: É um método da Java DSL utilizado para definir o(s) endpoint(s) final(is) da rota.
                                 //É opcional e pode estar presente ou não, de acordo com o padrão de integração utilizado.
-                                .to("file://D:\\Documents\\Study\\UFU\\CURSOS\\SFTP\\apache-camel_sftp\\src\\main\\resources\\download\\"+file)
+                                .to("file://"+new File("src/main/resources/download/"+file).getAbsoluteFile())
                                 //process: A forma mais flexível de manipular dados em trânsito é através de processadores.
                                 //Um processador é uma classe com propósito de fazer manipulações complexas no conteúdo
                                 //de um exchange.
