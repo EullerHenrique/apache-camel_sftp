@@ -371,14 +371,15 @@ para enviar os dados.
 
 ### Teste de Volume
  
- - Mantenha a anotação @Bean localizada no método testeVolume pertencente à classe Test descomentada.
- - Mantenha a anotação @Bean localizada no método testeManipulacao pertencente à classe Test comentada.
+ - Descomente a anotação @Bean localizada no método testeVolume pertencente à classe Test.
+ - Comente a anotação @Bean localizada no método testeManipulacao pertencente à classe Test.
  - Ao executar a aplicação, tal teste será executado
  
 ### Teste de Manipulação de CSV
  
- - Mantenha a anotação @Bean localizada no método testeVolume pertencente à classe Test comentada.
- - Mantenha a anotação @Bean localizada no método testeManipulacao pertencente à classe Test descomentada.
+ - Comente a anotação @Bean localizada no método testeVolume pertencente à classe Test.
+ - Descomente a anotação @Bean localizada no método testeManipulacao pertencente à classe Test.
  - Ao executar a aplicação, tal teste será executado
+
 
 
