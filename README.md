@@ -2,14 +2,13 @@
 
 ## Sumário 
 
-- [Conceito](#conceito)
-
+- [Conceito FTP/SFTP](#conceito-ftpsftp)
+- [Conceito Apache Camel](#conceito-apache-camel)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
- 
 - [Configuração](#configuração)
 
 
-## Conceito
+## Conceito: FTP/SFTP
 
 "
 
@@ -185,20 +184,151 @@ O SFTP também pode ser visto como uma melhoria em relação ao FTPS, que é ape
 
 " - Fonte: https://www.venafi.com/blog/what-secure-file-transfer-protocol-sftp-and-how-use-it
 
-## Tecnologias Utilizadas
+## Conceito: Apache Camel
 
-- Spring Boot
-- Docker
-- atmoz/sftp
-- Lombok
+"
 
-## Configuração
+Utilizando o Apache Camel, conseguimos abstrair toda a lógica do sistema que não conhecemos e nos preocupamos com apenas 
+a integração para o nosso programa.
 
-  1. Clone o repósitorio e abra-o em uma IDE (Ex: Intellij)
-  2. Instale o docker (https://www.docker.com/products/docker-desktop/) e abra-o
-  3. Navegue pelo terminal até src/main/resources ou navegue pela IDE até src/main/resources/docker-compose.yaml
-  4. Execute o comando docker-compose up -d ou aperte o botão play localizado ao lado do campo services
-  5. Navegue pela IDE até SftpApplication
-  6. Aperte o botão play localizado ao lado de "public class SftpApplication"
+O que é Apache Camel?
+
+Apache Camel é uma framework open-source muito versátil baseada no que o site da Apache chama de Enterprise Integration 
+Patterns, que nada mais é do que uma lista de padrões corporativos e middleware orientado a mensagem. 
+Isso pode ser conferido com maior quantidade de detalhes no site oficial do Apache.
+
+No Camel, temos a possibilidade de definir as regras de roteamento e mediação em uma variedade de linguagens específicas 
+de domínio (DSL, XML e YAML). Dessa maneira, você consegue um auto preenchimento das regras de roteamento na sua IDE, 
+seja em um editor Java ou XML.
+
+O Apache Camel utiliza URIs para trabalhar diretamente com qualquer tipo de transporte ou modelo de mensagem, como HTTPS,
+ActiveMQ, JMS, JBI, SCA, MINA ou CXF. Também é possível utilizar as classes Components e Data Format.
+
+Além de ser uma pequena biblioteca com poucas dependências, a integração com qualquer aplicativo Java é bem simples. 
+O Apache Camel dá total liberdade para que você trabalhe com a mesma interface do projeto, independentemente do tipo 
+de transporte usado. Logo, você só vai precisar aprender uma vez para conseguir interagir com todos os componentes.
+
+Por fim, Apache Camel também tem suporte para diversas frameworks, como por exemplo o Spring Boot.
 
 
+Terminologia e Arquitetura
+
+Message: Contém os dados que estão sendo transferidos para uma rota. Cada mensagem tem um identificador único e é 
+construído a partir de um corpo, cabeçalho e anexo.
+Exchange: O contêiner de uma mensagem. É criado a partir do recebimento de uma mensagem durante o processo de 
+roteamento. Com o Exchange, conseguimos diferentes tipos de interações entre os sistemas, podemos definir uma mensagem 
+unilateral ou uma mensagem que solicita algo e espera uma resposta
+Endpoint: Nomenclatura muito famosa na parte do back-end. É um canal por meio do qual o sistema pode receber ou enviar 
+uma mensagem. Pode referir-se a um URI da web, URI de fila, arquivo, endereço de e-mail, entre outros.
+Component: Atua como uma fábrica do endpoint. Resumindo, os componentes oferecem uma interface para diferentes 
+tecnologias utilizando a mesma abordagem e sintaxe. O Camel já tem suporte a muitos componentes para quase todas as 
+tecnologias possíveis, no entanto também oferece a oportunidade de escrever componentes personalizados para o seu 
+sistema.
+Processor: É uma interface simples do Java que é usada para adicionar a lógica de integração customizada com uma rota.
+Ele contém o método de processo que é usado para realizar a lógica de negócios personalizada em uma mensagem recebida 
+por uma pessoa consumidora. 
+
+Vendo por cima, a arquitetura do Apache Camel é bem simples. Temos o CamelContext, que representa o sistema no tempo de 
+execução, e a partir disso obtemos os diferentes conceitos de rotas, componentes e endpoints.
+
+Além do mais, os processadores lidam com o roteamento e as transformações entre os endpoints.
+
+Rotas: No Camel, temos o conceito de rotas. Essas interligam os endpoints determinados pelos métodos from() e to(), 
+referindo-se a origem e destino, respectivamente. 
+Como parâmetros desses métodos, temos a chance de utilizar as URIs de acordo com o componente utilizado. 
+Entre os dois endpoints, podemos escolher algumas regras para o tratamento de dados, tais como transformações, filtros, 
+divisões, validações, etc.
+
+URI: Podemos ver a estrutura de uma URI no Apache Camel a seguir
+ file  :  data/inbox    ?delay=5000
+scheme   Context path     Options
+
+Todas as URIs têm o mesmo padrão: componente:parâmetros?opções. O primeiro elemento refere-se ao componente a ser 
+utilizado para ler os dados na entrada da rota e, a partir da base nas especificações dele, são definidos os 
+parâmetros e as opções.
+
+Componentes: Com um suporte de pelo menos 20 componentes no core e mais outros 300 disponíveis para o uso, 
+o Apache Camel tem uma biblioteca considerável. Na documentação oficial, podemos ver a listagem de todos os componentes.
+Com eles, conseguimos implementar APIs utilizando o seu sistema de integração. Dessa forma, podemos até mesmo abstrair 
+os protocolos e os tipos de dados.
+
+O que é a Domain Specific Language?
+
+Domain Specific Language, ou em português, linguagem de domínio específico é uma linguagem de programação dedicada a um 
+determinado domínio de um aplicativo.
+
+Temos um grande volume de variedades de DSLs, desde linguagens que utilizamos para domínios comuns, como HTML 
+para páginas da web, até linguagens usadas por apenas um ou alguns pedaços do programa, como Mush.
+
+DSLs podem ser subdivididos pelo tipo de linguagem e incluem linguagens de marcação específicas de domínio, 
+como o XML, linguagens de modelagem específicas de domínio e linguagens de programação específicas de domínio.
+
+Esses tipos de linguagens sempre existiram na computação, no entanto, o termo “linguagem de domínio específico” 
+tornou-se muito popular nos últimos anos. Isso se deve ao surgimento da modelagem de domínio específico.
+
+Voltando ao Camel, as rotas e a engenharia do roteamento são parte fundamental dessa ferramenta. Temos nas rotas o 
+fluxo e a lógica de integração entre os diferentes sistemas.
+
+Para definir as rotas de uma maneira mais simples e limpa, o Camel oferece diferentes tipos de DSLs para as 
+linguagens de programação como Java ou Groovy. Por outro lado, também oferece a possibilidade de definir rotas no 
+XML com o Spring DSL.
+
+Quando devo usar Apache Camel? 
+
+Integrando aplicativos juntos
+
+O principal objetivo do Camel é a movimentação de dados entre diferentes protocolos e aplicativos (como arquivos, 
+e-mails, APIs ou aplicativos da web).
+
+Conseguimos usar o Apache Camel quando queremos mover dados entre qualquer um dos aplicativos e protocolos suportados 
+por seus mais de 300 componentes. Os componentes do Camel geralmente funcionam de maneira semelhante. Dessa forma, 
+depois de aprender a como usar um componente, será mais fácil utilizar outros. O Camel inclui componentes para muitos 
+aplicativos diferentes, do Facebook e Twitter ao Salesforce e Workday. Você também pode escrever um componente 
+customizado.
+
+Desenvolvimento baseado em padrões
+
+Alguns requisitos frequentes para integração — como suporte para transações ou transformações de dados — 
+normalmente seriam complicados de planejar e escrever em código. Mas o Camel oferece algumas soluções por padrão e, 
+muitas vezes, pode ser ativado com apenas o toque de um botão, ou alterando uma variável. A partir do Camel, 
+temos alguns padrões e funcionalidades para coisas como:
+
+Dados de roteamento com base no seu conteúdo
+Manipulação de erros, transações e reversões
+Transformação de dados
+Cache de dados acessados com frequência
+Criptografia e autenticação
+Esses são apenas alguns exemplos do que o Camel é capaz de fazer.
+
+Todas essas lógicas são facilitadas pelo Apache Camel, pois ele fornece esses recursos como um conjunto de padrões, 
+chamados de padrões de integração empresarial. Se for útil para o seu projeto, você pode utilizar qualquer um 
+desses padrões de integração no seu código, sem nem precisar escrever sua própria solução.
+
+Com base nesses padrões, o Camel se torna uma ferramenta poderosíssima e muito produtiva para integrar sistemas 
+distribuídos.
+
+Um estilo de alto nível para muitas integrações
+
+Depois que você entende os padrões e os componentes do Camel, tudo se torna muito mais fácil.
+
+Essa é uma das principais vantagens do Camel: a habilidade de criar muitas integrações com muita velocidade. 
+O Apache Camel é ideal para quando você estiver desenvolvendo muitas integrações e gostaria que todas fossem 
+desenvolvidas de maneira igualitária. Essa provavelmente é uma opção muito atrativa para empresas de grande porte, 
+podendo ajudar a escolher uma abordagem que seja compartilhada e compreendida pela equipe de desenvolvimento.
+
+Quais as principais aplicações do Apache Camel na vida real?
+
+Processar e rotear dados: Conseguimos processar pedidos de clientes e encaminhá-los para um banco de dados 
+(Utilizando Spring Boot com o Camel e o ActiveMQ)
+Processar dados enviados pela web: Podemos receber e transformar formulários de uma pesquisa agrícola e, logo depois,
+adicionar em um banco de dados (Camel com Apache Karaf)
+Processamento de transações financeiras usando filas de mensagens: Alinhamos as transações financeiras e 
+encaminhamos para o departamento correto (Novamente Camel com Apache Karaf)
+Gateway nas suas APIs: Temos a possibilidade de adicionar um gateway que autentica uma API e roteia as mensagem para 
+a API correta (Apache Camel com Spring Boot)
+
+Resumindo, os melhores casos de uso para o Camel são quando temos uma forte base de dados para consumir. 
+Podemos utilizar tanto mensagens vindas de uma fila ou dados de um API. No final, temos que escolher um destino 
+para enviar os dados.
+
+" - Fonte: https://blog.betrybe.com/framework-de-programacao/apache-camel-tudo-sobre/
