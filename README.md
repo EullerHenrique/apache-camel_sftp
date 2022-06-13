@@ -4,6 +4,8 @@
 
 - [Conceito FTP/SFTP](#conceito-ftpsftp)
 - [Conceito Apache Camel](#conceito-apache-camel)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Configuração](#configuração)
 
 ## Conceito: FTP/SFTP
 
@@ -329,3 +331,46 @@ Podemos utilizar tanto mensagens vindas de uma fila ou dados de um API. No final
 para enviar os dados.
 
 " - Fonte: https://blog.betrybe.com/framework-de-programacao/apache-camel-tudo-sobre/
+
+## Tecnologias Utilizadas
+
+- Spring Boot
+- Docker
+- atmoz/sftp
+- Lombok
+- Apache Camel
+
+## Configuração
+
+### Docker
+  
+  1. Clone o repósitorio
+  2. Instale o docker (https://www.docker.com/products/docker-desktop/)
+  3. Abra o docker
+  4. Abra o terminal
+  5. Navegue até a pasta docker
+  6. Digite docker-compose up -d
+  
+### Atmoz/sftp
+  1. Navegue até D:\Documents\Study\UFU\CURSOS\SFTP\apache-camel_sftp\src\main\resources 
+  2. Crie a pasta upload
+  3. Navegue até D:\Documents\Study\UFU\CURSOS\SFTP\apache-camel_sftp\src\main\resources/upload 
+  4. Crie a pasta 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+  5. Coloque os arquivos desejados em cada uma dessas pastas 
+  
+### Spring Boot
+  
+  1. Abra a pasta apache-camel_sftp em uma IDE (Ex: IntelliJ IDEA) 
+  2. Navegue pela IDE até ApacheCamelSftpApplication 
+  3. Aperte o botão play localizado ao lado de "public class ApacheCamelSftpApplication"
+  
+## Execução
+
+# Teste de Volume
+ - Mantenha a anotação @Bean localizada no método testeVolume pertencente à classe Test descomentada.
+ - Ao executar a aplicação, tal teste será executado
+ 
+# Teste de Manipulação de CSV
+
+
+
