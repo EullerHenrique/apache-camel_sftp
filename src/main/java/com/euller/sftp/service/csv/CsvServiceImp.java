@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.apache.commons.io.FileUtils;
+
 
 @Service
 public class CsvServiceImp implements CsvService{
@@ -145,13 +147,15 @@ public class CsvServiceImp implements CsvService{
             //muito grandes.
 
             //Verifica se todos os vínculos (mp3) do csv existem
+
             File file =  new File( new File("src/main/resources/download/11/input").getAbsolutePath());
             File[] files = file.listFiles();
 
             List<Boolean> bs = new ArrayList<>();
             for (int i = 0; i < linesOutput.size(); i++) {
+                //linesOutput.get(0)[4] = "Vínculo"
                 if (i > 0) {
-                    int ii = i;
+
                     //Arrays: Esta classe contém vários métodos para manipular arrays (como classificação e pesquisa).
                     //Essa classe também contém uma fábrica estática que permite que os arrays sejam vistos como listas.
                     //Todos os métodos nessa classe lançam um NullPointerException, se a referência de matriz especificada
@@ -176,7 +180,9 @@ public class CsvServiceImp implements CsvService{
                     //Esse método funciona como se invocasse o método split de dois argumentos com a expressão fornecida
                     //e um argumento limite igual a zero.
                     //Strings vazias à direita, portanto, não são incluídas na matriz resultante.
-                    //[4] = Vínculo
+                    //[4] = Coluna Vínculo
+
+                    int ii = i;
 
                     if (Arrays.stream(files).anyMatch(f -> linesOutput.get(ii)[4].equals(f.getName().split("\\.")[0]))) {
                         bs.add(true);
@@ -211,19 +217,26 @@ public class CsvServiceImp implements CsvService{
                 //O método close é invocado para liberar recursos que o objeto está mantendo (como arquivos abertos).
                 csvReader.close();
 
-                //fileOutputStream: Cria um fluxo de saída de arquivo para gravar no arquivo com o nome especificado.
-                //Um novo objeto FileDescriptor é criado para representar essa conexão de arquivo.
-                //Primeiro, se houver um gerenciador de segurança, seu método checkWrite será chamado com o nome
-                //como argumento.
-                //Se o arquivo existir, mas for um diretório em vez de um arquivo normal, não existir, mas não puder
-                //ser criado ou não puder ser aberto por qualquer outro motivo, uma FileNotFoundException será lançada.
+                //FileOutputStream: Um fluxo de saída de arquivo é um fluxo de saída para gravar dados em um arquivo ou em
+                //um FileDescriptor, se um arquivo está disponível ou pode ser criado dependendo da plataforma subjacente.
+                //Algumas plataformas, em particular, permitem que um arquivo seja aberto para gravação por apenas um
+                //FileOutputStream (ou outro objeto de gravação de arquivo) por vez. Em tais situações, os construtores dessa
+                //classe falharão se o arquivo envolvido já estiver aberto.
+                //FileOutputStream destina-se a gravar fluxos de bytes brutos, como dados de imagem. Para escrever fluxos de
+                //caracteres, considere usar FileWriter.
+
+                //FileUtils.openOutputStream: Abre um FileOutputStream para o arquivo especificado, verificando e criando
+                //o diretório pai se ele não existir.
+                //No final do método, o fluxo será aberto com sucesso ou uma exceção será lançada.
+                //O diretório pai será criado se não existir. O arquivo será criado se não existir. Uma exceção é lançada se
+                //o objeto de arquivo existir, mas for um diretório. Uma exceção é lançada se o arquivo existir, mas não puder
+                //ser gravado. Uma exceção é lançada se o diretório pai não puder ser criado.
 
                 //File: Cria uma nova instância de File convertendo a string de nome de caminho fornecida em um nome de
                 //caminho abstrato. Se a string fornecida for a string vazia, o resultado será o nome do caminho abstrato vazio.
 
-                FileOutputStream fileOutputStream = new FileOutputStream(
-                        new File("src/main/resources/download/11/output/31-05-2022-0152359-claro-v2.csv").getAbsolutePath());
-
+                FileOutputStream fileOutputStream = FileUtils.openOutputStream(
+                        new File("src/main/resources/download/11/output/31-05-2022-0152359-claro-v2.csv"));
 
                 //BufferedWriter: Grava texto em um fluxo de saída de caracteres, armazenando caracteres em buffer para
                 //fornecer a gravação eficiente de caracteres únicos, matrizes e strings.
@@ -241,7 +254,7 @@ public class CsvServiceImp implements CsvService{
                 //padrão da plataforma pode ser aceito.
                 //Cada chamada de um método write() faz com que o conversor de codificação seja invocado no(s)
                 //caractere(s) fornecido(s). Os bytes resultantes são acumulados em um buffer antes de serem gravados
-                //no fluxo de saída subjacente. Observe que os caracteres passados ​​para os métodos write()
+                //no fluxo de saída subjacente. Observe que os caracteres passados para os métodos write()
                 //não são armazenados em buffer.
                 //Para maior eficiência, considere agrupar um OutputStreamWriter em um BufferedWriter para evitar
                 //chamadas frequentes de conversor. Por exemplo:
