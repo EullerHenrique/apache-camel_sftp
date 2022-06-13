@@ -352,19 +352,21 @@ para enviar os dados.
   6. Digite docker-compose up -d
   
 ### Atmoz/sftp
+
   1. Navegue até D:\Documents\Study\UFU\CURSOS\SFTP\apache-camel_sftp\src\main\resources 
   2. Crie a pasta upload
   3. Navegue até D:\Documents\Study\UFU\CURSOS\SFTP\apache-camel_sftp\src\main\resources/upload 
-  4. Crie as pastas 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-  5. Coloque os arquivos desejados em cada uma dessas pastas 
+  4. Crie as pastas 1, 2, 3, 4, 5, 6, 7, 8, 9 e 10
+  5. Coloque arquivos em cada uma dessas pastas 
+  6. Descomente as linhas 37, 38, 39, 40 e 41 e comente as linhas 42, 43, 44, 45 e 46 na classe DownloadFile
   
-### Spring Boot
+### Java/Spring Boot
   
   1. Abra a pasta apache-camel_sftp em uma IDE (Ex: IntelliJ IDEA) 
   2. Navegue pela IDE até ApacheCamelSftpApplication 
   3. Aperte o botão play localizado ao lado de "public class ApacheCamelSftpApplication"
   
-## Execução
+## Testes
 
 # Teste de Volume
  - Mantenha a anotação @Bean localizada no método testeVolume pertencente à classe Test descomentada.
