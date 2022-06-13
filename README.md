@@ -335,6 +335,7 @@ para enviar os dados.
 
 ## Tecnologias Utilizadas
 
+- Java
 - Spring Boot
 - Docker
 - atmoz/sftp
