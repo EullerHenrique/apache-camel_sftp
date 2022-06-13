@@ -355,7 +355,7 @@ para enviar os dados.
   1. Navegue até D:\Documents\Study\UFU\CURSOS\SFTP\apache-camel_sftp\src\main\resources 
   2. Crie a pasta upload
   3. Navegue até D:\Documents\Study\UFU\CURSOS\SFTP\apache-camel_sftp\src\main\resources/upload 
-  4. Crie a pasta 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+  4. Crie as pastas 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
   5. Coloque os arquivos desejados em cada uma dessas pastas 
   
 ### Spring Boot
