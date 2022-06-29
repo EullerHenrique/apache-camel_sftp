@@ -2,8 +2,8 @@
 
 ## Sumário 
 
-- [Conceito FTP/SFTP](#conceito-ftpsftp)
-- [Conceito Apache Camel](#conceito-apache-camel)
+- [Conceito: FTP/SFTP](#conceito-ftpsftp)
+- [Conceito: Apache Camel](#conceito-apache-camel)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Configuração](#configuração)
 - [Testes](#testes)
